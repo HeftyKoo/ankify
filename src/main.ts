@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core'
-import { AppModule } from './app.module'
+import { YoudaoModule } from './youdao/youdao.module'
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
-  await app.listen(3000)
+  const app = await NestFactory.create(YoudaoModule)
+  await app.listen(9002)
 }
 bootstrap()
