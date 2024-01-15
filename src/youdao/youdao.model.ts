@@ -31,9 +31,11 @@ export class YoudaoTranslation {
     return this.data.media_sents_part?.sent
       ?.filter((item) => item['@mediatype'] === 'audio')
       .map((item) => {
+        const snippet = item.snippets.snippet[0]
         return {
           eng: item.eng,
-          url: item.snippets.snippet[0].streamUrl,
+          url: snippet.streamUrl,
+          name: `${snippet.source}: ${snippet.name}`,
         }
       })
   }
