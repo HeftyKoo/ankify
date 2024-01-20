@@ -1,4 +1,10 @@
-import { Controller, Get, Query, ValidationPipe } from '@nestjs/common'
+import {
+  Controller,
+  Get,
+  Query,
+  ValidationPipe,
+  NotFoundException,
+} from '@nestjs/common'
 import { YoudaoService } from './youdao.service'
 import { TranslateDto } from './youdao.dto'
 
@@ -9,11 +15,22 @@ export class YoudaoController {
   @Get()
   async translate(@Query(new ValidationPipe()) dto: TranslateDto) {
     const { text } = dto
-    const res = await this.appService.translate(text)
+    const { enParaphrase, ecParaphrase, mediaSentsPart } =
+      await this.appService.translate(text)
+
+    if (
+      !enParaphrase?.length &&
+      !ecParaphrase?.length &&
+      !mediaSentsPart?.length
+    ) {
+      throw new NotFoundException('No result')
+    }
+
     return {
-      en: res.enParaphrase,
-      ec: res.ecParaphrase,
-      media: res.mediaSentsPart,
+      text,
+      en: enParaphrase,
+      ec: ecParaphrase,
+      media: mediaSentsPart,
     }
   }
 }
