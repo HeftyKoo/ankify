@@ -39,7 +39,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
           port: ${{ secrets.PORT }}
-          key: ${{ secrets.KEY }}
+          password: ${{ secrets.PASSWORD }}
           source: './'
           target: /home/servers/ankify
 
@@ -49,7 +49,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
           port: ${{ secrets.PORT }}
-          key: ${{ secrets.KEY }}
+          password: ${{ secrets.PASSWORD }}
           script: |
             cd /home/servers/ankify
             pm2 restart ./dist/main.js --name ankify
