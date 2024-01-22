@@ -18,7 +18,7 @@ export class YoudaoService {
 
     return new Promise(async (resolve) => {
       const browser = await puppeteer.launch({
-        // headless: false,
+        headless: 'new',
         // devtools: true,
       })
 

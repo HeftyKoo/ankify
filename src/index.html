@@ -58,7 +58,7 @@
       shadow.appendChild(wrapper)
     }
     render() {
-      const html = this.autoplay + this.ecHTML + this.enHTML + this.sampleHTML
+      const html = this.front + this.autoplay + this.ecHTML + this.enHTML + this.sampleHTML
       this.wrapper.innerHTML = html
       this.attachPlayer()
     }
@@ -241,6 +241,10 @@
           margin: 0 8px;
         }
 
+        .word {
+          text-align: center!important;
+        }
+
 
         @keyframes audioPlay {
           0% {
@@ -342,6 +346,12 @@
       if (!text) return ''
 
       return `<audio src="https://dict.youdao.com/dictvoice?audio=${text}&type=2" autoplay></audio>`
+    }
+
+    get front () {
+      const text = this.data.text
+      if (!text) return ''
+      return `<h2 class="word">${text}</h2>`
     }
   }
   window.customElements.define('youdao-translate', YoudaoTranslate)
