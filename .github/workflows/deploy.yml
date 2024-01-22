@@ -52,4 +52,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd /home/servers/ankify
-            pm2 restart ./dist/main.js --name ankify
+            pm2 reload pm2.json

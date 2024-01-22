@@ -1,0 +1,8 @@
+{
+  "app": [
+    {
+      "name": "ankify",
+      "script": "./dist/main.js"
+    }
+  ]
+}
