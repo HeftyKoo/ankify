@@ -19,6 +19,8 @@ export class YoudaoService {
     return new Promise(async (resolve) => {
       const browser = await puppeteer.launch({
         headless: 'new',
+        args: ['--no-sandbox', '--disable-dev-shm-usage'],
+        executablePath: process.env.CHROME_PATH,
         // devtools: true,
       })
 
