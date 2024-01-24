@@ -1,5 +1,6 @@
 import {
   Controller,
+  Logger,
   Get,
   Query,
   ValidationPipe,
@@ -10,6 +11,7 @@ import { TranslateDto } from './youdao.dto'
 
 @Controller('youdao')
 export class YoudaoController {
+  private readonly logger = new Logger(YoudaoController.name)
   constructor(private readonly appService: YoudaoService) {}
 
   @Get()
