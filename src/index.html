@@ -108,6 +108,15 @@
         // sample.addEventListener('click', sample._onClick)
         sample.onclick = sample._onClick
       })
+
+      // play word voice
+      const dictVoice = this.shadowRoot.querySelector('.dictvoice')
+      const word = this.shadowRoot.querySelector('.word')
+      if (word && dictVoice) {
+        word.onclick = () => {
+          dictVoice.play()
+        }
+      }
     }
 
     // connectedCallback() {
@@ -145,6 +154,11 @@
         p {
           list-style: none;
           margin: 0;
+          padding: 0;
+        }
+
+        ul {
+          padding-left: 16px;
         }
 
         * {
@@ -172,7 +186,7 @@
         .pos {
           text-align: left;
           color: #939599;
-          margin-right: 12px;
+          margin-right: 8px;
         }
 
         /* summary {
@@ -203,7 +217,7 @@
         }
 
         .sen-eng {
-          margin-right: 12px;
+          margin-right: 8px;
           ;
         }
 
@@ -215,7 +229,7 @@
         .sen-ch {
           color: #939599;
           font-size: 12px !important;
-          margin-right: 12px;
+          margin-right: 8px;
         }
 
         .secondary {
@@ -345,7 +359,7 @@
       const text = this.data.text
       if (!text) return ''
 
-      return `<audio src="https://dict.youdao.com/dictvoice?audio=${text}&type=2" autoplay></audio>`
+      return `<audio class="dictvoice" src="https://dict.youdao.com/dictvoice?audio=${text}&type=2" autoplay></audio>`
     }
 
     get front () {
