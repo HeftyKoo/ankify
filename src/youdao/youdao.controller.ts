@@ -43,4 +43,11 @@ export class YoudaoController {
       media: mediaSentsPart,
     }
   }
+
+  @Get('raw')
+  async getRaw(@Query(new ValidationPipe()) dto: TranslateDto) {
+    const { text } = dto
+    const { data } = await this.appService.translate(text)
+    return data
+  }
 }
