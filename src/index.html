@@ -256,9 +256,17 @@
         }
 
         .word {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
           text-align: center!important;
         }
 
+        .phonetic {
+          font-size: 14px;
+          color: #939599;
+        }
 
         @keyframes audioPlay {
           0% {
@@ -362,10 +370,20 @@
       return `<audio class="dictvoice" src="https://dict.youdao.com/dictvoice?audio=${text}&type=2" autoplay></audio>`
     }
 
+    get phonetic () {
+      const phonetic = this.data.phonetic
+      
+      if (!phonetic?.usphone && !phonetic?.ukphone) return ''
+
+      return `
+        <span class="phonetic">/ ${phonetic.usphone || phonetic.ukphone} /</span>
+      `
+    }
+
     get front () {
       const text = this.data.text
       if (!text) return ''
-      return `<h2 class="word">${text}</h2>`
+      return `<h2 class="word">${text}${this.phonetic}</h2>`
     }
   }
   window.customElements.define('youdao-translate', YoudaoTranslate)
@@ -374,7 +392,8 @@
 <body>
   <youdao-translate
     class="tappable"
-    data="%7B%22text%22%3A%22test%22%2C%22en%22%3A%5B%7B%22pos%22%3A%22n.%22%2C%22tr%22%3A%5B%7B%22tran%22%3A%22any%20standardized%20procedure%20for%20measuring%20sensitivity%20or%20memory%20or%20intelligence%20or%20aptitude%20or%20personality%20etc%22%2C%22similarWords%22%3A%5B%22mental%20test%22%2C%22mental%20testing%22%2C%22psychometric%20test%22%5D%7D%2C%7B%22tran%22%3A%22the%20act%20of%20testing%20something%22%2C%22similarWords%22%3A%5B%22trial%22%2C%22run%22%5D%7D%2C%7B%22tran%22%3A%22the%20act%20of%20undergoing%20testing%22%2C%22similarWords%22%3A%5B%22trial%22%5D%7D%2C%7B%22tran%22%3A%22trying%20something%20to%20find%20out%20about%20it%22%2C%22similarWords%22%3A%5B%22trial%22%2C%22trial%20run%22%2C%22tryout%22%5D%7D%2C%7B%22tran%22%3A%22a%20set%20of%20questions%20or%20exercises%20evaluating%20skill%20or%20knowledge%22%2C%22similarWords%22%3A%5B%22examination%22%2C%22exam%22%5D%7D%2C%7B%22tran%22%3A%22a%20hard%20outer%20covering%20as%20of%20some%20amoebas%20and%20sea%20urchins%22%7D%5D%7D%2C%7B%22pos%22%3A%22v.%22%2C%22tr%22%3A%5B%7B%22tran%22%3A%22put%20to%20the%20test%2C%20as%20for%20its%20quality%2C%20or%20give%20experimental%20use%20to%22%2C%22similarWords%22%3A%5B%22prove%22%2C%22try%22%2C%22try%20out%22%2C%22examine%22%2C%22essay%22%5D%7D%2C%7B%22tran%22%3A%22test%20or%20examine%20for%20the%20presence%20of%20disease%20or%20infection%22%2C%22similarWords%22%3A%5B%22screen%22%5D%7D%2C%7B%22tran%22%3A%22examine%20someone's%20knowledge%20of%20something%22%2C%22similarWords%22%3A%5B%22quiz%22%5D%7D%2C%7B%22tran%22%3A%22show%20a%20certain%20characteristic%20when%20tested%22%7D%2C%7B%22tran%22%3A%22achieve%20a%20certain%20score%20or%20rating%20on%20a%20test%22%7D%2C%7B%22tran%22%3A%22determine%20the%20presence%20or%20properties%20of%20(a%20substance)%22%7D%2C%7B%22tran%22%3A%22undergo%20a%20test%22%7D%5D%7D%5D%2C%22ec%22%3A%5B%7B%22pos%22%3A%22n.%22%2C%22tran%22%3A%22%EF%BC%88%E4%B9%A6%E9%9D%A2%E6%88%96%E5%8F%A3%E5%A4%B4%E7%9A%84%EF%BC%89%E6%B5%8B%E9%AA%8C%EF%BC%8C%E8%80%83%E8%AF%95%EF%BC%9B%EF%BC%88%E5%8C%BB%E7%96%97%E4%B8%8A%E7%9A%84%EF%BC%89%E6%A3%80%E6%9F%A5%EF%BC%8C%E5%8C%96%E9%AA%8C%EF%BC%8C%E6%A3%80%E9%AA%8C%EF%BC%9B%EF%BC%88%E5%AF%B9%E6%9C%BA%E5%99%A8%E6%88%96%E6%AD%A6%E5%99%A8%E7%AD%89%E7%9A%84%EF%BC%89%E8%AF%95%E9%AA%8C%EF%BC%8C%E6%A3%80%E9%AA%8C%EF%BC%9B%EF%BC%88%E5%AF%B9%E6%B0%B4%E3%80%81%E5%9C%9F%E5%A3%A4%E3%80%81%E7%A9%BA%E6%B0%94%E7%AD%89%E7%9A%84%EF%BC%89%E6%A3%80%E6%B5%8B%EF%BC%8C%E6%A3%80%E9%AA%8C%EF%BC%9B%EF%BC%88%E8%A1%A1%E9%87%8F%E8%83%BD%E5%8A%9B%E6%88%96%E6%8A%80%E8%83%BD%E7%AD%89%E7%9A%84%EF%BC%89%E6%B5%8B%E8%AF%95%EF%BC%8C%E8%80%83%E9%AA%8C%EF%BC%9B%E5%8C%BB%E7%96%97%E6%A3%80%E6%9F%A5%E8%AE%BE%E5%A4%87%EF%BC%9B%E5%8C%96%E9%AA%8C%E7%BB%93%E6%9E%9C%EF%BC%9B%EF%BC%88%E5%B8%B8%E6%8C%87%E6%9D%BF%E7%90%83%E3%80%81%E6%A9%84%E6%A6%84%E7%90%83%E7%9A%84%EF%BC%89%E5%9B%BD%E9%99%85%E9%94%A6%E6%A0%87%E8%B5%9B%EF%BC%88Test%EF%BC%89%EF%BC%9B%E5%87%86%E5%88%99%EF%BC%8C%E6%A0%87%E5%87%86%EF%BC%9B%EF%BC%88%E5%86%B6%EF%BC%89%E7%83%A4%E9%92%B5%EF%BC%8C%E7%81%B0%E7%9A%BF%EF%BC%9B%EF%BC%88%E4%B8%80%E4%BA%9B%E6%97%A0%E8%84%8A%E6%A4%8E%E5%8A%A8%E7%89%A9%E5%92%8C%E5%8E%9F%E7%94%9F%E5%8A%A8%E7%89%A9%E7%9A%84%EF%BC%89%E7%94%B2%E5%A3%B3%22%7D%2C%7B%22pos%22%3A%22v.%22%2C%22tran%22%3A%22%E8%AF%95%E9%AA%8C%EF%BC%8C%E6%B5%8B%E8%AF%95%EF%BC%9B%E6%B5%8B%E9%AA%8C%EF%BC%8C%E8%80%83%E6%9F%A5%EF%BC%88%E7%86%9F%E7%BB%83%E7%A8%8B%E5%BA%A6%EF%BC%8C%E7%9F%A5%E8%AF%86%EF%BC%89%EF%BC%9B%E6%A3%80%E6%B5%8B%EF%BC%8C%E6%A3%80%E9%AA%8C%EF%BC%88%E8%B4%A8%E9%87%8F%E6%88%96%E5%90%AB%E9%87%8F%EF%BC%89%EF%BC%9B%E6%A3%80%E6%9F%A5%EF%BC%88%E8%BA%AB%E4%BD%93%EF%BC%89%EF%BC%8C%EF%BC%88%E7%94%A8%E8%AF%95%E5%89%82%EF%BC%89%E5%8C%96%E9%AA%8C%EF%BC%9B%E8%80%83%E9%AA%8C%EF%BC%9B%E5%B0%9D%EF%BC%8C%EF%BC%88%E8%A7%A6%EF%BC%89%E8%AF%95%22%7D%5D%2C%22media%22%3A%5B%7B%22eng%22%3A%22On%20%3Cb%3Etest%3C%2Fb%3E%20day%2Call%20the%20blind%20drivers%20were%20able%20to%20guide%20the%20car%20through%20the%20%3Cb%3Etest%3C%2Fb%3E%20area%20without%20any%20problems.%22%2C%22url%22%3A%22https%3A%2F%2Fdict.youdao.com%2Fpureaudio%3Fdocid%3D9124750424542814363%22%2C%22name%22%3A%22VOA%3A%20special.2009.11.03%22%7D%2C%7B%22eng%22%3A%22%3Cb%3ETest%3C%2Fb%3E%20projects%20have%20already%20begun%2C%20and%20he%20says%20the%20main%20part%20of%20the%20National%20Children's%20Study%20will%20begin%20next%20year.%22%2C%22url%22%3A%22https%3A%2F%2Fdict.youdao.com%2Fpureaudio%3Fdocid%3D-6522469105827384991%22%2C%22name%22%3A%22VOA%3A%20special.2011.08.03%22%7D%2C%7B%22eng%22%3A%22A%20listener%20named%20Maki%20would%20like%20to%20know%20if%20the%20%3Cb%3Etest%3C%2Fb%3E%20known%20as%20the%20TOEIC%20is%20popular%20in%20the%20United%20States.%22%2C%22url%22%3A%22https%3A%2F%2Fdict.youdao.com%2Fpureaudio%3Fdocid%3D-3651802721598717877%22%2C%22name%22%3A%22VOA%3A%20special.2010.02.18%22%7D%5D%7D" />
+    data="%7B%22text%22%3A%22hotchpotch%22%2C%22phonetic%22%3A%7B%22usphone%22%3A%22%CB%88h%C9%91%CB%90t%CA%83p%C9%91%CB%90t%CA%83%22%2C%22ukphone%22%3A%22%CB%88h%C9%92t%CA%83p%C9%92t%CA%83%22%7D%2C%22en%22%3A%5B%7B%22pos%22%3A%22n.%22%2C%22tr%22%3A%5B%7B%22tran%22%3A%22a%20motley%20assortment%20of%20things%22%2C%22similarWords%22%3A%5B%22odds%20and%20ends%22%2C%22oddments%22%2C%22melange%22%2C%22farrago%22%2C%22ragbag%22%2C%22mishmash%22%2C%22mingle-mangle%22%2C%22hodgepodge%22%2C%22gallimaufry%22%2C%22omnium-gatherum%22%5D%7D%2C%7B%22tran%22%3A%22a%20stew%20(or%20thick%20soup)%20made%20with%20meat%20and%20vegetables%22%7D%5D%7D%5D%2C%22ec%22%3A%5B%7B%22pos%22%3A%22n.%22%2C%22tran%22%3A%22%E6%9D%82%E7%83%A9%22%7D%5D%7D"
+    />
 </body>
 
 </html>

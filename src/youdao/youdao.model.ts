@@ -26,6 +26,16 @@ export class YoudaoTranslation {
     return this.data.ec?.word?.trs
   }
 
+  get phonetic() {
+    const { usphone, ukphone } = this.data.ec?.word || {}
+    if (!usphone && !ukphone) return
+
+    return {
+      usphone: this.data.ec?.word?.usphone,
+      ukphone: this.data.ec?.word?.ukphone,
+    }
+  }
+
   // media_sents_part
   get mediaSentsPart() {
     return this.data.media_sents_part?.sent

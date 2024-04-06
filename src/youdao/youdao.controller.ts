@@ -17,7 +17,7 @@ export class YoudaoController {
   @Get()
   async translate(@Query(new ValidationPipe()) dto: TranslateDto) {
     const { text } = dto
-    const { enParaphrase, ecParaphrase, mediaSentsPart } =
+    const { enParaphrase, ecParaphrase, mediaSentsPart, phonetic } =
       await this.appService.translate(text)
 
     if (
@@ -30,6 +30,7 @@ export class YoudaoController {
 
     return {
       text,
+      phonetic,
       en: enParaphrase,
       ec: ecParaphrase,
       media: mediaSentsPart,
