@@ -20,6 +20,13 @@ export class YoudaoController {
     const { enParaphrase, ecParaphrase, mediaSentsPart, phonetic } =
       await this.appService.translate(text)
 
+    this.logger.log(
+      `Translate: ${text}`,
+      `en: ${enParaphrase}`,
+      `ec: ${ecParaphrase}`,
+      `media: ${mediaSentsPart}`,
+    )
+
     if (
       !enParaphrase?.length &&
       !ecParaphrase?.length &&
