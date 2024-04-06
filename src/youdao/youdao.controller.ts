@@ -22,9 +22,9 @@ export class YoudaoController {
 
     this.logger.log(
       `Translate: ${text}`,
-      `en: ${enParaphrase}`,
-      `ec: ${ecParaphrase}`,
-      `media: ${mediaSentsPart}`,
+      `en: ${JSON.stringify(enParaphrase)}`,
+      `ec: ${JSON.stringify(ecParaphrase)}`,
+      `media: ${JSON.stringify(mediaSentsPart)}`,
     )
 
     if (
