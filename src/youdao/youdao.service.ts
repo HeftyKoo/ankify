@@ -27,7 +27,7 @@ export class YoudaoService {
       const page = await browser.newPage()
       await page.goto('https://youdao.com/')
       const $input = await page.$('#search_input')
-      $input.type(text)
+      await $input.type(text, { delay: 100 })
 
       page.on('response', async (response) => {
         const request = response.request()
